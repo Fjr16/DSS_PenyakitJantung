@@ -1,9 +1,10 @@
 <aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme">
     <div class="app-brand demo">
         <a href="/dashboard" class="app-brand-link">
-            <span class="app-brand-logo demo">
-            </span>
-            <span class="app-brand-text menu-text fw-bolder fs-4 ms-2 mt-1">SPK Destinasi</span>
+            {{-- <span class="app-brand-logo demo">
+                SPK
+            </span> --}}
+            <span class="text-center menu-text fw-bolder fs-4 ms-2 mt-1">Diagnosa Dini Penyakit Jantung</span>
         </a>
 
         <a href="javascript:void(0);" class="layout-menu-toggle menu-link text-large ms-auto d-block d-xl-none">
@@ -18,11 +19,17 @@
             <span class="menu-header-text text-secondary">Main</span>
         </li> --}}
         <!-- Dashboard -->
-        <li class="menu-item {{ $title === 'Dashboard' ? 'active' : '' }}">
+        <li class="menu-header small text-muted">
+            <span class="menu-header-text text-uppercase">Dashboard</span>
+        </li>
+        <li class="menu-item {{ $title === 'dashboard' ? 'active' : '' }}">
             <a href="/dashboard" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-home-circle"></i>
                 <div data-i18n="Analytics">Dashboard</div>
             </a>
+        </li>
+        <li class="menu-header small text-muted">
+            <span class="menu-header-text text-uppercase">Master Data</span>
         </li>
 
         {{-- <li class="menu-header small text-uppercase">
@@ -36,17 +43,17 @@
             </a>
             <ul class="menu-sub">
                 <li class="menu-item {{ $title == 'alternative' ? 'active' : '' }}">
-                    <a href="{{ route('spk/destinasi/alternative.index') }}" class="menu-link">
+                    <a href="" class="menu-link">
                         <div>Alternatif Wisata (A)</div>
                     </a>
                 </li>
                 <li class="menu-item {{ $title == 'kriteria' ? 'active' : '' }}">
-                    <a href="{{ route('spk/destinasi/kriteria.index') }}" class="menu-link">
+                    <a href="" class="menu-link">
                         <div>Kriteria (C)</div>
                     </a>
                 </li>
                 <li class="menu-item {{ $title == 'penilaian' ? 'active' : '' }}">
-                    <a href="{{ route('spk/destinasi/penilaian.index') }}" class="menu-link">
+                    <a href="" class="menu-link">
                         <div>Penilaian (R)</div>
                     </a>
                 </li>
@@ -54,17 +61,14 @@
         </li>
 
         @can('admin')      
-            <li class="menu-header small text-muted">
-                <span class="menu-header-text text-uppercase">Administrator</span>
-            </li>
             <li class="menu-item {{ $title === 'Kategori Wisata' ? 'active' : '' }}">
-                <a href="{{ route('spk/destinasi/kategori/wisata.index') }}" class="menu-link">
+                <a href="" class="menu-link">
                     <i class="menu-icon tf-icons bx bx-category"></i>
                     <div>Kategori Wisata</div>
                 </a>
             </li>
-            <li class="menu-item {{ $title === 'Management User' ? 'active' : '' }}">
-                <a href="{{ route('spk/destinasi/user.index') }}" class="menu-link">
+            <li class="menu-item {{ $title === 'User' ? 'active' : '' }}">
+                <a href="{{ route('user.index') }}" class="menu-link">
                     <i class="menu-icon tf-icons bx bx-user"></i>
                     <div>Manajemen user</div>
                 </a>

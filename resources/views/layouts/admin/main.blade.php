@@ -117,13 +117,13 @@
     <div class="layout-wrapper layout-content-navbar">
         <div class="layout-container">
             <!-- Menu -->
-            @include('layouts.auth-v1.sidebar')
+            @include('layouts.admin.sidebar')
             <!-- / Menu -->
 
             <!-- Layout container -->
             <div class="layout-page">
                 <!-- Navbar -->
-                @include('layouts.auth-v1.navbar')
+                @include('layouts.admin.navbar')
                 <!-- / Navbar -->
 
                 <!-- Content wrapper -->
@@ -166,7 +166,7 @@
 
 
                     <!-- Footer -->
-                    @include('layouts.auth-v1.footer')
+                    @include('layouts.admin.footer')
                     <!-- / Footer -->
 
                     <div class="content-backdrop fade"></div>

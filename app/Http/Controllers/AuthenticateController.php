@@ -2,18 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Providers\RouteServiceProvider;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class AuthenticateController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
-    {
-        //
-    }
-
     /**
      * Show the form for creating a new resource.
      */
@@ -29,38 +23,29 @@ class AuthenticateController extends Controller
      */
     public function store(Request $request)
     {
-        //
-    }
+        $credentials = $request->validate([
+            'username' => 'required|string',
+            'password' => 'required',
+        ]);
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
-    }
+        if (!Auth::attempt($credentials)) {
+            return back()->with('error', 'Username atau password salah')->withInput();
+        }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
-    {
-        //
+        $request->session()->regenerate();
+        return redirect()->intended(RouteServiceProvider::HOME);
     }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
-    {
-        //
-    }
-
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Request $request)
     {
-        //
+        Auth::guard('web')->logout();
+
+        $request->session()->invalidate();
+
+        $request->session()->regenerate();
+
+        return redirect(RouteServiceProvider::HOME);
     }
 }

@@ -27,8 +27,10 @@
                     @endif
                     <div class="row justify-content-start">
                         <div class="col-md-12 text-start mb-4">
-                            <h2 class="heading-section mb-4">Padang Eksplorasi, <br> Temukan Tempat Wisata Terbaik</h2>
-                            <p class="text-white">Masuk dengan data yang anda masukkan saat pendaftaran.</p>
+                            <div class="mb-4">
+                                <h4 class="text-primary">Diagnosa Dini Penyakit Jantung</h4>
+                                <h4 class="fst-italic text-white">Ketahui resiko terkena penyakit jantung lebih Dini</h4>
+                            </div>
                         </div>
                     </div>
                     <div class="row justify-content-start">

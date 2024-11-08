@@ -14,6 +14,7 @@ class UserController extends Controller
      */
     public function index()
     {
+        $this->authorize('admin');
         $data = User::all();
         return view('pages.user.index', [
             'title' => 'User',
@@ -27,6 +28,7 @@ class UserController extends Controller
      */
     public function create()
     {
+        $this->authorize('admin');
         return view('pages.user.create', [
             'title' => 'User',
             'menu' => 'User',
@@ -38,6 +40,7 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
+        $this->authorize('admin');
         $data = $request->validate([
             'name' => 'required|string|max:255',
             'username' => 'required|string|max:255',
@@ -63,6 +66,7 @@ class UserController extends Controller
      */
     public function edit(string $id)
     {
+        $this->authorize('admin');
         $item = User::find(decrypt($id));
         return view('pages.user.edit', [
             'title' => 'User',
@@ -76,6 +80,7 @@ class UserController extends Controller
      */
     public function update(Request $request, string $id)
     {
+        $this->authorize('admin');
         $data = $request->validate([
             'name' => 'required|string',
             'username' => 'required|string',
@@ -99,6 +104,7 @@ class UserController extends Controller
      */
     public function destroy(string $id)
     {
+        $this->authorize('admin');
         $item = User::find(decrypt($id));
         $item->delete();
 

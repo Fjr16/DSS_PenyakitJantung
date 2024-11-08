@@ -32,48 +32,36 @@
             <span class="menu-header-text text-uppercase">Master Data</span>
         </li>
 
-        {{-- <li class="menu-header small text-uppercase">
-            <span class="menu-header-text text-white">Master</span>
-        </li> --}}
-        <li class="menu-item {{ $menu == 'data' ? 'open' : '' }}">
-            <a href="javascript:void(0);" class="menu-link menu-toggle">
-                {{-- <i class="menu-icon tf-icons bx bxs-cog"></i> --}}
-                <i class='menu-icon tf-icons bx bx-box'></i>
-                <div>Data</div>
+        <li class="menu-item {{ $title === 'Penyakit' ? 'active' : '' }}">
+            <a href="{{ route('penyakit.index') }}" class="menu-link">
+                <i class='menu-icon tf-icons bx bxs-virus'></i>
+                <div>Penyakit</div>
             </a>
-            <ul class="menu-sub">
-                <li class="menu-item {{ $title == 'alternative' ? 'active' : '' }}">
-                    <a href="" class="menu-link">
-                        <div>Alternatif Wisata (A)</div>
-                    </a>
-                </li>
-                <li class="menu-item {{ $title == 'kriteria' ? 'active' : '' }}">
-                    <a href="" class="menu-link">
-                        <div>Kriteria (C)</div>
-                    </a>
-                </li>
-                <li class="menu-item {{ $title == 'penilaian' ? 'active' : '' }}">
-                    <a href="" class="menu-link">
-                        <div>Penilaian (R)</div>
-                    </a>
-                </li>
-            </ul>
         </li>
-
-        @can('admin')      
-            <li class="menu-item {{ $title === 'Kategori Wisata' ? 'active' : '' }}">
-                <a href="" class="menu-link">
-                    <i class="menu-icon tf-icons bx bx-category"></i>
-                    <div>Kategori Wisata</div>
-                </a>
-            </li>
-            <li class="menu-item {{ $title === 'User' ? 'active' : '' }}">
-                <a href="{{ route('user.index') }}" class="menu-link">
-                    <i class="menu-icon tf-icons bx bx-user"></i>
-                    <div>Manajemen user</div>
-                </a>
-            </li>
+        <li class="menu-item {{ $title === 'Gejala' ? 'active' : '' }}">
+            <a href="{{ route('gejala.index') }}" class="menu-link">
+                <i class='menu-icon tf-icons bx bx-first-aid'></i>
+                <div>Gejala</div>
+            </a>
+        </li>
+        @can('admin')
+        <li class="menu-item {{ $title === 'User' ? 'active' : '' }}">
+            <a href="{{ route('user.index') }}" class="menu-link">
+                <i class="menu-icon tf-icons bx bx-user"></i>
+                <div>Manajemen user</div>
+            </a>
+        </li>
         @endcan
+
+        <li class="menu-header small text-muted">
+            <span class="menu-header-text text-uppercase">Perhitungan</span>
+        </li>
+        <li class="menu-item {{ $title === 'Rule' ? 'active' : '' }}">
+            <a href="" class="menu-link">
+                <i class='menu-icon tf-icons bx bx-cog'></i>
+                <div>Dempster Rule</div>
+            </a>
+        </li>
         
     </ul>
 </aside>

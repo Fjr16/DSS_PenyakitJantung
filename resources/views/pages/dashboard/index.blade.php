@@ -5,9 +5,9 @@
       <div class="col-lg-12 mb-1 order-0">
         <div class="card mb-4">
               <div class="card-body">
-                <h5 class="card-title text-primary">Selamat Datang {{ auth()->user()->name ?? '-' }} ({{ auth()->user()->role ?? '-' }})! 🎉</h5>
+                <h5 class="card-title text-primary">Selamat Datang {{ auth()->user()->name ?? '-' }} ({{ auth()->user()->level ?? '-' }})</h5>
                 <p class="mb-0">
-                  Profesional, Berintegritas, Responsif, User Friendly, dan Fokus Pada Kenyamanan Pengguna.
+                  Profesional, Berintegritas, dan fokus pada keakuratan dalam membantu dokter mendiagnosa penyakit jantung.
                 </p>
               </div>
         </div>
@@ -19,7 +19,7 @@
         <div class="card-body">
           <h4 class="text-white">Total Penyakit</h4>
           <hr>
-          <h1 class="text-white"></h1>
+          <h1 class="text-white">{{ $penyakit->count() ?? '-' }}</h1>
         </div>
       </div>
     </div>
@@ -28,7 +28,7 @@
         <div class="card-body">
           <h4 class="text-white">Total Gejala</h4>
           <hr>
-          <h1 class="text-white"></h1>
+          <h1 class="text-white">{{ $gejala->count() ?? '-' }}</h1>
         </div>
       </div>
     </div>
@@ -37,7 +37,7 @@
         <div class="card-body">
           <h4 class="text-white">Total Pengguna</h4>
           <hr>
-          <h1 class="text-white"></h1>
+          <h1 class="text-white">{{ $pengguna->count() ?? '-' }}</h1>
         </div>
       </div>
     </div>
@@ -46,10 +46,10 @@
     <div class="nav-align-top mt-4">
       <ul class="nav nav-tabs" role="tablist">
         <li class="nav-item">
-          <button type="button" class="nav-link active" role="tab" data-bs-toggle="tab" data-bs-target="#navs-left-align-home">Alternatif</button>
+          <button type="button" class="nav-link active" role="tab" data-bs-toggle="tab" data-bs-target="#navs-left-align-home">Penyakit</button>
         </li>
         <li class="nav-item">
-          <button type="button" class="nav-link" role="tab" data-bs-toggle="tab" data-bs-target="#navs-left-align-profile">Kriteria</button>
+          <button type="button" class="nav-link" role="tab" data-bs-toggle="tab" data-bs-target="#navs-left-align-profile">Gejala</button>
         </li>
         <li class="nav-item">
           <button type="button" class="nav-link" role="tab" data-bs-toggle="tab" data-bs-target="#navs-left-align-messages">Pengguna</button>
@@ -61,33 +61,23 @@
           <table class="table table-sm text-nowrap">
             <thead class="table-secondary">
               <tr>
-                <th>Nama Wisata</th>
-                <th>Alamat</th>
-                <th>Harga</th>
-                <th>Rating</th>
-                <th>Fasilitas</th>
-                <th>Foto</th>
+                <th>Kode Penyakit</th>
+                <th>Nama Penyakit</th>
+                <th>Deskripsi</th>
               </tr>
             </thead>
             <tbody>
-              {{-- @foreach ($alt->take(5) as $a)                  
+              @foreach ($penyakit->take(5) as $a)                  
                 <tr>
+                  <td>{{ $a->code ?? '-' }}</td>
                   <td>{{ $a->name ?? '-' }}</td>
-                  <td class="text-wrap">{{ $a->alamat ?? '-' }}</td>
-                  <td>{{ number_format($a->harga ?? 0) }}</td>
-                  <td>{{ $a->rating ?? 0 }}</td>
-                  <td class="text-wrap">{{ $a->fasilitas ?? '-' }}</td>
-                  <td>
-                    <a href="{{ Storage::url($a->foto ?? '-') }}">
-                      <img src="{{ Storage::url($a->foto ?? '-') }}" class="img-fluid" width="100" height="100" alt="">
-                    </a>
-                  </td>
+                  <td class="text-wrap">{{ $a->description ?? '-' }}</td>
                 </tr>
-              @endforeach --}}
+              @endforeach
             </tbody>
           </table>
           <div class="table-footer">
-            <a href="" class="btn btn-sm btn-outline-primary">Lihat Selengkapnya ..</a>
+            <a href="{{ route('penyakit.index') }}" class="btn btn-sm btn-outline-primary">Lihat Selengkapnya ..</a>
           </div>
          </div>
         </div>
@@ -97,25 +87,21 @@
             <table class="table" id="dataTable">
               <thead class="table-secondary">
                 <tr>
-                  <th>Kode Kriteria</th>
-                  <th>Nama Kriteria</th>
-                  <th>Tipe</th>
-                  <th>Bobot</th>
+                  <th>Kode Gejala</th>
+                  <th>Nama Gejala</th>
                 </tr>
               </thead>
               <tbody>
-                {{-- @foreach ($cri->take(5) as $r)                    
+                @foreach ($gejala->take(5) as $r)                    
                   <tr>
-                    <td>{{ $r->kode ?? '-' }}</td>
+                    <td>{{ $r->code ?? '-' }}</td>
                     <td>{{ $r->name ?? '-' }}</td>
-                    <td>{{ $r->tipe ?? '-' }}</td>
-                    <td>{{ $r->bobot ?? '-' }}</td>
                   </tr>
-                @endforeach --}}
+                @endforeach
               </tbody>
             </table>
             <div class="table-footer">
-              <a href="" class="btn btn-sm btn-outline-primary">Lihat Selengkapnya ..</a>
+              <a href="{{ route('gejala.index') }}" class="btn btn-sm btn-outline-primary">Lihat Selengkapnya ..</a>
             </div>
            </div>
         </div>
@@ -125,25 +111,22 @@
               <thead class="table-secondary">
                 <tr>
                   <th>Nama Pengguna</th>
-                  <th>Email</th>
                   <th>Username</th>
-                  <th>Role</th>
+                  <th>level</th>
                 </tr>
               </thead>
               <tbody>
-                {{-- @foreach ($user as $usr)
-                    
+                @foreach ($pengguna as $usr)
+                  <tr>
+                    <td>{{ $usr->name ?? '-' }}</td>
+                    <td>{{ $usr->username ?? '-' }}</td>
+                    <td>{{ $usr->level ?? '-' }}</td>
+                  </tr>
                 @endforeach
-                <tr>
-                  <td>{{ $usr->name ?? '-' }}</td>
-                  <td>{{ $usr->email ?? '-' }}</td>
-                  <td>{{ $usr->username ?? '-' }}</td>
-                  <td>{{ $usr->role ?? '-' }}</td>
-                </tr> --}}
               </tbody>
             </table>
             <div class="table-footer">
-              <a href="" class="btn btn-sm btn-outline-primary">Lihat Selengkapnya ..</a>
+              <a href="{{ route('user.index') }}" class="btn btn-sm btn-outline-primary">Lihat Selengkapnya ..</a>
             </div>
            </div>
         </div>

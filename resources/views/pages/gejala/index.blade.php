@@ -14,6 +14,7 @@
                             <th>#</th>
                             <th>Kode Gejala</th>
                             <th>Nama Gejala</th>
+                            <th>Bobot</th>
                             <th>Action</th>
                         </tr>
                     </thead>
@@ -23,6 +24,7 @@
                                 <td>{{ $loop->iteration }}</td>
                                 <td>{{ $item->code ?? '-' }}</td>
                                 <td>{{ $item->name ?? '-' }}</td>
+                                <td>{{ $item->bobot ?? '-' }}</td>
                                 <td>
                                     <div class="d-flex">
                                         <a href="{{ route('gejala.edit', encrypt($item->id)) }}" class="btn btn-icon btn-outline-warning me-1"><i class="bx bx-edit"></i></a>

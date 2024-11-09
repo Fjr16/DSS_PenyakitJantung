@@ -15,7 +15,6 @@ return new class extends Migration
             $table->id();
             $table->foreignId('disease_id')->required();
             $table->foreignId('symtom_id')->required();
-            $table->float('belief')->required();
             $table->timestamps();
         });
     }

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\DemsterRuleController;
 use App\Http\Controllers\DiseaseController;
 use App\Http\Controllers\SymtomController;
 use App\Http\Controllers\UserController;
@@ -18,7 +19,7 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
-Route::middleware(['auth'])->group(function () {
+Route::middleware('auth')->group(function () {
     Route::get('/dashboard', function () {
         $penyakit = Disease::all();
         $gejala = Symtom::all();
@@ -53,6 +54,10 @@ Route::middleware(['auth'])->group(function () {
     Route::get('gejala/edit/{id}', [SymtomController::class, 'edit'])->name('gejala.edit');
     Route::put('gejala/update/{id}', [SymtomController::class, 'update'])->name('gejala.update');
     Route::delete('gejala/destroy/{id}', [SymtomController::class, 'destroy'])->name('gejala.destroy');
+
+    Route::get('demster/rule', [DemsterRuleController::class, 'index'])->name('demster/rule.index');
+    Route::post('demster/rule/store', [DemsterRuleController::class, 'store'])->name('demster/rule.store');
+    Route::delete('demster/rule/destroy/{id}', [DemsterRuleController::class, 'destroy'])->name('demster/rule.destroy');
 
 });
 

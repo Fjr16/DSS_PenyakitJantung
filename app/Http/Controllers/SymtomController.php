@@ -58,6 +58,7 @@ class SymtomController extends Controller
     {
         $data = $request->validate([
             'name' => 'required|string',
+            'bobot' => 'required',
         ]);
         $data['code'] = $this->reformatCode();
 
@@ -90,6 +91,7 @@ class SymtomController extends Controller
         $this->authorize('admin');
         $data = $request->validate([
             'name' => 'required|string',
+            'bobot' => 'required',
         ]);
         $item = Symtom::find(decrypt($id));
 

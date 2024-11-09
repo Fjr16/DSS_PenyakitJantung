@@ -15,7 +15,7 @@ class Disease extends Model
         'description',
     ];
 
-    public function beliefValues() {
-        return $this->hasMany(BeliefValue::class);
+    public function symtoms() {
+        return $this->belongsToMany(Symtom::class, 'belief_values');
     }
 }

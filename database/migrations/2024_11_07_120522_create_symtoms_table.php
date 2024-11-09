@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('code', 10)->required();
             $table->string('name')->required();
+            $table->float('bobot')->required();
             $table->timestamps();
         });
     }

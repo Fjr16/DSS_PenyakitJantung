@@ -12,7 +12,6 @@ class BeliefValue extends Model
     protected $fillable = [
         'disease_id',
         'symtom_id',
-        'belief',
     ];
 
 

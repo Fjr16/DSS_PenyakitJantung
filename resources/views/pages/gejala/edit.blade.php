@@ -19,6 +19,10 @@
                         <label for="nama-gejala" class="form-label">Nama Gejala</label>
                         <input type="text" class="form-control form-control-md" id="nama-gejala" name="name" placeholder="Nama gejala" value="{{ old('name', $item->name ?? '') }}" required />
                     </div>
+                    <div class="mb-3">
+                        <label for="bobot" class="form-label">Bobot</label>
+                        <input type="number" step="0.01" min="0.01" class="form-control form-control-md" id="bobot" name="bobot" placeholder="Bobot Gejala" value="{{ old('bobot', $item->bobot ?? 0.01) }}" required />
+                    </div>
                 </div>
                 <div class="col-md-12 mt-4 border-top">
                     <div class="d-flex justify-content-center mt-4">

@@ -56,8 +56,8 @@
         <li class="menu-header small text-muted">
             <span class="menu-header-text text-uppercase">Perhitungan</span>
         </li>
-        <li class="menu-item {{ $title === 'Rule' ? 'active' : '' }}">
-            <a href="" class="menu-link">
+        <li class="menu-item {{ $title === 'Demster Rule' ? 'active' : '' }}">
+            <a href="{{ route('demster/rule.index') }}" class="menu-link">
                 <i class='menu-icon tf-icons bx bx-cog'></i>
                 <div>Dempster Rule</div>
             </a>

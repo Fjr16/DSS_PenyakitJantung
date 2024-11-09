@@ -12,9 +12,10 @@ class Symtom extends Model
     protected $fillable = [
         'code',
         'name',
+        'bobot',
     ];
 
-    public function beliefValues() {
-        return $this->hasMany(BeliefValue::class);
+    public function diseases() {
+        return $this->belongsToMany(Disease::class, 'belief_values');
     }
 }

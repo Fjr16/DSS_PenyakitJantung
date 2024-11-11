@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\DemsterRuleController;
 use App\Http\Controllers\DiseaseController;
 use App\Http\Controllers\SymtomController;
@@ -60,5 +61,11 @@ Route::middleware('auth')->group(function () {
     Route::delete('demster/rule/destroy/{id}', [DemsterRuleController::class, 'destroy'])->name('demster/rule.destroy');
 
 });
+
+// customer page
+Route::get('/', [CustomerController::class, 'index'])->name('homepage');
+Route::get('/test', [CustomerController::class, 'combineBeliefs'])->name('test');
+Route::get('/diagnosa/jantung/create', [CustomerController::class, 'create'])->name('diagnosa.create');
+Route::post('/diagnosa/jantung/store', [CustomerController::class, 'store'])->name('diagnosa.store');
 
 require __DIR__.'/auth.php';

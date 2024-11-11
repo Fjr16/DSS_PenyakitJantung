@@ -123,7 +123,7 @@
             <!-- Layout container -->
             <div class="layout-page">
                 <!-- Navbar -->
-                @include('layouts.auth-v2.navbar')
+                @include('layouts.dokter.navbar')
                 <!-- / Navbar -->
 
                 <!-- Content wrapper -->
@@ -166,7 +166,7 @@
 
 
                     <!-- Footer -->
-                    @include('layouts.auth-v2.footer')
+                    @include('layouts.dokter.footer')
                     <!-- / Footer -->
 
                     <div class="content-backdrop fade"></div>

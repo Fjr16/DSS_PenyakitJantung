@@ -1,16 +1,15 @@
 <nav class="navbar navbar-expand-xl navbar-dark bg-primary">
   <div class="container-fluid">
-   <a class="navbar-brand" href="{{ route('spk/destinasi/home.index') }}">SPK Destinasi</a>
-   <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar-ex-7">
-   <span class="navbar-toggler-icon"></span>
-   </button>
 
    <div class="collapse navbar-collapse" id="navbar-ex-7">
    <div class="navbar-nav me-auto">
-      <a class="nav-item nav-link {{ $title == 'Home' ? 'active' : '' }}" href="{{ route('spk/destinasi/home.index') }}">Home</a>
-      <a class="nav-item nav-link {{ $title == 'Rekomendasi' ? 'active' : '' }}" href="{{ route('spk/destinasi/rekomendasi.create') }}">Temukan Rekomendasi</a>
+      <a class="nav-item nav-link {{ $title == 'Home' ? 'active' : '' }}" href="/">Home</a>
+      <a class="nav-item nav-link {{ $title == 'Diagnosa' ? 'active' : '' }}" href="{{ route('diagnosa.create') }}">Diagnosa</a>
    </div>
    <ul class="navbar-nav ms-lg-auto">
+      @can('admin')
+      <a class="nav-item nav-link {{ $title == 'Dashboard' ? 'active' : '' }}" href="/dashboard">Dashboard</a>
+      @endcan
       <li class="nav-item">
          @auth
          <form action="{{ route('logout') }}" method="POST">

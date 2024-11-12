@@ -4,7 +4,9 @@
     <div class="card">
         <div class="card-header d-flex align-items-center justify-content-between border-bottom mb-4">
             <h4 class="m-0 p-0">Data Gejala</h4>
+            @can('admin')
             <a href="{{ route('gejala.create') }}" class="btn btn-sm btn-primary">Tambah Gejala</a>
+            @endcan
         </div>
         <div class="card-body">
             <div class="table-responsive text-wrap">
@@ -15,7 +17,9 @@
                             <th>Kode Gejala</th>
                             <th>Nama Gejala</th>
                             <th>Bobot</th>
+                            @can('admin')
                             <th>Action</th>
+                            @endcan
                         </tr>
                     </thead>
                     <tbody>
@@ -25,6 +29,7 @@
                                 <td>{{ $item->code ?? '-' }}</td>
                                 <td>{{ $item->name ?? '-' }}</td>
                                 <td>{{ $item->bobot ?? '-' }}</td>
+                                @can('admin')
                                 <td>
                                     <div class="d-flex">
                                         <a href="{{ route('gejala.edit', encrypt($item->id)) }}" class="btn btn-icon btn-outline-warning me-1"><i class="bx bx-edit"></i></a>
@@ -34,6 +39,7 @@
                                         </button>
                                     </div>
                                 </td>
+                                @endcan
                             </tr>
                         @endforeach
                     </tbody>

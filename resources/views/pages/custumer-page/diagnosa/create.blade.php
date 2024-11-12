@@ -23,7 +23,7 @@
                     </div>
                     <div class="mb-3">
                         <label for="jenis-kelamin" class="form-label">Jenis Kelamin</label>
-                        <select class="form-select" id="jenis-kelamin" name="jenis_kelamin" aria-label="Default select example">
+                        <select class="form-select" id="jenis-kelamin" name="jenis_kelamin" aria-label="Default select example" required>
                           <option selected>Pilih</option>
                           <option value="Pria">Pria</option>
                           <option value="Wanita">Wanita</option>
@@ -31,7 +31,7 @@
                     </div>
                     <div class="mb-3">
                         <label for="alamat" class="form-label">Alamat</label>
-                        <textarea class="form-control" name="alamat" id="alamat" placeholder="Ketik alamat pasien disini ..." cols="30" rows="4"></textarea>
+                        <textarea class="form-control" name="alamat" id="alamat" placeholder="Ketik alamat pasien disini ..." cols="30" rows="4" required></textarea>
                     </div>
                 </div>
                 <div class="col-md-7 border p-4">
@@ -62,5 +62,74 @@
         </form>
     </div>
 </div>
+
+@isset($showModal)    
+    <!-- Extra Large Modal -->
+    <div class="modal fade" id="exLargeModal" data-bs-backdrop="static" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-xl" role="document">
+        <div class="modal-content">
+        <div class="modal-header" style="background-image: url('/assets/img/bg.jpg'); background-size: cover; background-position: center;">
+            <h4 class="modal-title text-white" id="exampleModalLabel4">
+                Hasil Diagnosa
+            </h4>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>     
+        <div class="modal-body">
+            <div class="pb-2 border-bottom mb-2">
+                <div class="mb-0 row">
+                    <span class="fw-bold col-1">Nama</span>
+                    <span class="col-11">
+                        : {{ $dataPasien['name'] }} ({{ $dataPasien['usia'] }}) th <span class="badge bg-{{ $dataPasien['jenis_kelamin'] == 'Pria' ? 'primary' : 'danger' }}">{{ $dataPasien['jenis_kelamin'] == 'Pria' ? 'L' : 'P' }}</span>
+                    </span> 
+                </div>
+                <div class="mb-0 row">
+                    <span class="fw-bold col-1">Alamat</span> 
+                    <span class="col-11">
+                        : {{ $dataPasien['alamat'] ?? '-' }}
+                    </span>
+                </div>
+            </div>
+            <div class="mb-2">
+                <h5>Gejala Dialami</h5>
+                <div class="row mb-3">
+                    <div class="col">
+                        <ol>
+                            @foreach ($dataGejala as $sym)
+                                <li>{{ $sym->name ?? '-' }}</li>
+                            @endforeach
+                        </ol>
+                    </div>
+                </div>
+                <h5>Hasil Diagnosa</h5>
+                <div class="row">
+                    <div class="col">
+                        Pasien di diagnosa <span class="fw-bold fst-italic">{{ $hasilDiagnosa ? $hasilDiagnosa->name : 'Tidak Diketahui' }}</span>
+                        @if ($hasilDiagnosa)
+                        dengan nilai
+                        sebesar <span class="fw-bold fst-italic">{{ (round($maxValue ?? 0, 2) * 100) . ' %' }}</span>
+                        @endif 
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-label-secondary" data-bs-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary">Save changes</button>
+        </div>
+        </div>
+    </div>
+    </div>
+@endisset
+
+  <script>
+        if ({{ isset($showModal) }}){
+            document.addEventListener("DOMContentLoaded", function() {
+                const modal = new bootstrap.Modal(document.getElementById('exLargeModal'));
+                modal.show();
+            });
+        }
+
+  </script>
     
 @endsection

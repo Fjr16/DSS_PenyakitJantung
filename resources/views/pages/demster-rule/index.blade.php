@@ -2,58 +2,60 @@
 
 @section('content')
 
-    <div class="accordion mb-3" id="accordionExample">
-        <div class="card accordion-item active">
-        <h2 class="accordion-header" id="headingOne">
-            <button type="button" class="accordion-button" data-bs-toggle="collapse" data-bs-target="#accordionOne" aria-expanded="true" aria-controls="accordionOne" role="tabpanel">
-            Tambah / Edit Rule
-            </button>
-        </h2>
-    
-        <div id="accordionOne" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
-            <div class="accordion-body">
-                <form action="{{ route('demster/rule.store') }}" method="POST">
-                    @csrf
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="mb-4">
-                                <label for="penyakit" class="form-label">Penyakit</label>
-                                <select class="form-select" id="penyakit" name="disease_id" aria-label="Default select example" required>
-                                  <option selected disabled>Pilih Penyakit</option>
-                                  @foreach ($penyakits as $p)
-                                    @if (old('disease_id') == $p->id)
-                                        <option value="{{ $p->id }}" selected>{{ $p->name ?? '-' }}</option>
-                                    @else
-                                        <option value="{{ $p->id }}">{{ $p->name ?? '-' }}</option>
-                                    @endif
-                                  @endforeach
-                                </select>
-                              </div>
-                            <div class="row">
-                                <label for="penyakit" class="form-label">Gejala</label>
-                                @foreach ($gejalas as $g)    
-                                <div class="col-6">
-                                    <div class="form-check mb-2">
-                                        <input class="form-check-input" type="checkbox" name="symtom_id[]" value="{{ $g->id ?? '' }}" id="symtom_id_{{ $loop->iteration }}" />
-                                        <label class="form-check-label" for="symtom_id_{{ $loop->iteration }}">
-                                            <span class="text-capitalize">{{ $g->name ?? '-' }}</span> {{  ' (' . ($g->code ?? '-') . ')'  }}
-                                        </label>
-                                    </div>
+    @can('admin')    
+        <div class="accordion mb-3" id="accordionExample">
+            <div class="card accordion-item active">
+            <h2 class="accordion-header" id="headingOne">
+                <button type="button" class="accordion-button" data-bs-toggle="collapse" data-bs-target="#accordionOne" aria-expanded="true" aria-controls="accordionOne" role="tabpanel">
+                Tambah / Edit Rule
+                </button>
+            </h2>
+
+            <div id="accordionOne" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+                <div class="accordion-body">
+                    <form action="{{ route('demster/rule.store') }}" method="POST">
+                        @csrf
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="mb-4">
+                                    <label for="penyakit" class="form-label">Penyakit</label>
+                                    <select class="form-select" id="penyakit" name="disease_id" aria-label="Default select example" required>
+                                    <option selected disabled>Pilih Penyakit</option>
+                                    @foreach ($penyakits as $p)
+                                        @if (old('disease_id') == $p->id)
+                                            <option value="{{ $p->id }}" selected>{{ $p->name ?? '-' }}</option>
+                                        @else
+                                            <option value="{{ $p->id }}">{{ $p->name ?? '-' }}</option>
+                                        @endif
+                                    @endforeach
+                                    </select>
                                 </div>
-                                @endforeach
+                                <div class="row">
+                                    <label for="penyakit" class="form-label">Gejala</label>
+                                    @foreach ($gejalas as $g)    
+                                    <div class="col-6">
+                                        <div class="form-check mb-2">
+                                            <input class="form-check-input" type="checkbox" name="symtom_id[]" value="{{ $g->id ?? '' }}" id="symtom_id_{{ $loop->iteration }}" />
+                                            <label class="form-check-label" for="symtom_id_{{ $loop->iteration }}">
+                                                <span class="text-capitalize">{{ $g->name ?? '-' }}</span> {{  ' (' . ($g->code ?? '-') . ')'  }}
+                                            </label>
+                                        </div>
+                                    </div>
+                                    @endforeach
+                                </div>
+                            </div>
+                            <div class="col-md-12 mt-0">
+                                <div class="d-flex justify-content-center mt-4">
+                                    <button type="submit" class="btn btn-md btn-success"><i class="bx bx-file"></i> Simpan</button>
+                                </div>
                             </div>
                         </div>
-                        <div class="col-md-12 mt-0">
-                            <div class="d-flex justify-content-center mt-4">
-                                <button type="submit" class="btn btn-md btn-success"><i class="bx bx-file"></i> Simpan</button>
-                            </div>
-                        </div>
-                    </div>
-                </form>
+                    </form>
+                </div>
+            </div>
             </div>
         </div>
-        </div>
-    </div>
+    @endcan
 
     <div class="card">
         <div class="card-header d-flex align-items-center justify-content-between border-bottom mb-4">

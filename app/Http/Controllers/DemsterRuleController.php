@@ -74,6 +74,7 @@ class DemsterRuleController extends Controller
      */
     public function store(Request $request)
     {
+        $this->authorize('admin');
         $request->validate([
             'disease_id' => 'required|exists:diseases,id',
             'symtom_id' => 'required|array',
@@ -83,13 +84,5 @@ class DemsterRuleController extends Controller
         $item->symtoms()->sync($request->symtom_id);
 
         return back()->with('success', 'Berhasil Ditambahkan');
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-        //
     }
 }

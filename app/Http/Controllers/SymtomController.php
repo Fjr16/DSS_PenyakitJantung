@@ -43,6 +43,7 @@ class SymtomController extends Controller
      */
     public function create()
     {
+        $this->authorize('admin');
         $lastCode = $this->reformatCode();
         return view('pages.gejala.create', [
             'title' => 'Gejala',
@@ -56,6 +57,8 @@ class SymtomController extends Controller
      */
     public function store(Request $request)
     {
+        $this->authorize('admin');
+
         $data = $request->validate([
             'name' => 'required|string',
             'bobot' => 'required',

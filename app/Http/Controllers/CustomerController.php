@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Disease;
 use App\Models\Symtom;
 use Illuminate\Http\Request;
 
@@ -103,18 +104,14 @@ class CustomerController extends Controller
 
         $dataBeliefValues = [];
     
-        // $dataTest2 = null;
         foreach ($symtomIds as $index => $symtomId) {
             $item = Symtom::find($symtomId);
             $diseaseCodes = implode(',', $item->diseases->pluck('code')->toArray());
-            // $data = $this->getDisease($item);
             $dataBeliefValues[$item->name] = [
                 $diseaseCodes => $item->bobot,
                 'theta' => 1 - $item->bobot,
             ];
         }
-
-        // dd($dataTest1, $dataTest2);
 
         $m1 = null;
         $result = [];
@@ -127,7 +124,28 @@ class CustomerController extends Controller
             }
         }
         $hasilAkhir = $m1;
-        dd($result);
+        $maxValue = max($hasilAkhir);
+        $maxKey = array_search($maxValue, $hasilAkhir);
+
+        $hasilDiagnosa = Disease::where('code', $maxKey)->first();
+
+        $dataPasien = $request->except(['symtom_id', '_token']);
+        $dataGejala = [];
+        foreach ($data['symtom_id'] as $key => $symId) {
+            $dataGejala[] = Symtom::find($symId);
+        }
+
+        $data = Symtom::all();
+        return view('pages.custumer-page.diagnosa.create', [
+            'title' => 'Diagnosa',
+            'showModal' => true,
+            'maxKey' => $maxKey,
+            'maxValue' => $maxValue,
+            'hasilDiagnosa' => $hasilDiagnosa,
+            'dataPasien' => $dataPasien,
+            'dataGejala' => $dataGejala,
+            'data' => $data,
+        ]);
     }
 
     private function intersect($hyp1, $hyp2) {

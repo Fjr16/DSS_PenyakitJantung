@@ -7,9 +7,9 @@
       <a class="nav-item nav-link {{ $title == 'Diagnosa' ? 'active' : '' }}" href="{{ route('diagnosa.create') }}">Diagnosa</a>
    </div>
    <ul class="navbar-nav ms-lg-auto">
-      @can('admin')
-      <a class="nav-item nav-link {{ $title == 'Dashboard' ? 'active' : '' }}" href="/dashboard">Dashboard</a>
-      @endcan
+      @auth
+      <a class="nav-item nav-link {{ $title == 'Dashboard' ? 'active' : '' }}" href="/dashboard"><i class='bx bxs-dashboard'></i> Dashboard</a>
+      @endauth
       <li class="nav-item">
          @auth
          <form action="{{ route('logout') }}" method="POST">

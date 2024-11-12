@@ -44,6 +44,7 @@ class DiseaseController extends Controller
      */
     public function create()
     {
+        $this->authorize('admin');
         $lastCode = $this->reformatCode();
         return view('pages.penyakit.create', [
             'title' => 'Penyakit',
@@ -57,6 +58,7 @@ class DiseaseController extends Controller
      */
     public function store(Request $request)
     {
+        $this->authorize('admin');
         $data = $request->validate([
             'name' => 'required|string',
             'description' => 'required|string',
